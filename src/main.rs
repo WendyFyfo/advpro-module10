@@ -101,16 +101,30 @@ fn main() {
 
     // Spawn a task to print before and after waiting on a timer.
     spawner.spawn(async {
-        println!("Wendy's Computer: Wowdy!");
+        println!("Wendy's Computer: Wowdy! 1");
         // Wait for our timer future to complete after two seconds.
         TimerFuture::new(Duration::new(2, 0)).await;
-        println!("Wendyh's Computer: Wendone!");
+        println!("Wendyh's Computer: Wendone! 1");
+    });
+
+    spawner.spawn(async {
+        println!("Wendy's Computer: Wowdy! 2");
+        // Wait for our timer future to complete after two seconds.
+        TimerFuture::new(Duration::new(2, 0)).await;
+        println!("Wendyh's Computer: Wendone! 2");
+    });
+
+    spawner.spawn(async {
+        println!("Wendy's Computer: Wowdy! 3");
+        // Wait for our timer future to complete after two seconds.
+        TimerFuture::new(Duration::new(2, 0)).await;
+        println!("Wendyh's Computer: Wendone! 3");
     });
 
     println!("Wendy's Computer: Wendid!");
     // Drop the spawner so that our executor knows it is finished and won't
     // receive more incoming tasks to run.
-    drop(spawner);
+    // drop(spawner);
 
     // Run the executor until the task queue is empty.
     // This will print "howdy!", pause, and then print "done!".
